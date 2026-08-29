@@ -97,6 +97,18 @@ describe('the catalog owns model curation', () => {
     })
   })
 
+  it('shows canonical ids when aggregator routes share the same friendly name', async () => {
+    getGlobalModelOptions.mockResolvedValue({
+      providers: [{ models: ['gc/grok-4.6', 'grok-cli/grok-4.6'], name: 'Omni', slug: 'omni' }]
+    })
+
+    renderMenu()
+
+    expect(await screen.findAllByText(/Grok 4\.6/i)).toHaveLength(2)
+    expect(screen.getByText('omni:gc/grok-4.6')).not.toBeNull()
+    expect(screen.getByText('omni:grok-cli/grok-4.6')).not.toBeNull()
+  })
+
   it('offers Edit Models without the host wiring it up', async () => {
     renderMenu()
     await screen.findByText(/Gemini 3\.1 Pro/i)
