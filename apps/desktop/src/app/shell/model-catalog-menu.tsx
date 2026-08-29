@@ -453,9 +453,17 @@ export function ModelCatalogMenu({
                           }}
                           {...kbRowProps(`${group.provider.slug}:${family.id}`)}
                         >
-                          <span className="min-w-0 flex-1 truncate">
-                            <HighlightMatches query={search} text={name} />
-                            {meta ? <span className="text-(--ui-text-tertiary)"> {meta}</span> : null}
+                          <span className="min-w-0 flex-1">
+                            <span className="block truncate">
+                              <HighlightMatches query={search} text={name} />
+                              {meta ? <span className="text-(--ui-text-tertiary)"> {meta}</span> : null}
+                            </span>
+                            <span
+                              className="block truncate text-[0.625rem] font-normal normal-case tracking-normal text-(--ui-text-tertiary)"
+                              title={`${group.provider.slug}:${family.id}`}
+                            >
+                              <HighlightMatches query={search} text={`${group.provider.slug}:${family.id}`} />
+                            </span>
                           </span>
                           {isCurrent ? (
                             <Codicon className="ml-auto text-foreground" name="check" size="0.75rem" />
